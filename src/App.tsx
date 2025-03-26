@@ -1,14 +1,13 @@
-import { Navbar } from "./components/layout/Navbar"
+import { BrowserRouter } from "react-router"
+import { AppRouter } from "./router/AppRouter"
 
 function App() {
 
-
   return (
-    <div>
-      {/* Para que se vea el navbar  */}
-      <Navbar/>  
-    </div>
+    <BrowserRouter>
+        <AppRouter />
+    </BrowserRouter>
+
   )
 }
-
 export default App
