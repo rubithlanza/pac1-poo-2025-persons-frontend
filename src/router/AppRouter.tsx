@@ -1,16 +1,23 @@
 import { Routes, Route } from "react-router";
 import { Navbar } from "../components/layout/Navbar";
+import { HomePage } from "../pages/home/HomePage";
+import { CountriesPage } from "../pages/countries/CoutriesPage";
+import { PersonsPage } from "../pages/persons/PersonsPage";
 
 export const AppRouter = () => {
 
     return(
         <div className="min-h-screen bg-gray-100">
-        <Navbar/>
 
         <Routes>
-        <Route path="/" element={<p>Hola Mundo - Home</p>} />
-          <Route path="/countries" element={<p>Hola Mundo - Countries</p>} />
-          <Route path="/persons" element={<p>Hola Mundo - Persons</p>} />
+            <Route element={<Navbar />}>
+
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/countries" element={<CountriesPage/>} />
+        <Route path="/persons" element={<PersonsPage/>} />
+            
+            </Route>
+
         </Routes>
 
         </div>

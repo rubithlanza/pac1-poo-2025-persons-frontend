@@ -2,18 +2,33 @@ import { Globe, Home, Menu, Users } from "lucide-react";
 import { NavLink } from "../shared/NavLink"
 import { useState } from "react";
 import { MobileNaveLink } from "../shared/MobileNaveLink";
+import { Outlet, useLocation } from "react-router";
 
 export const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const location = useLocation();
+
+
     const toggleMenu = () => {
         
         setIsMenuOpen(!isMenuOpen)
     }
 
+    const isActive = (path: string) => {
+    if(path === '/'){
+    return location.pathname === '/'
+    }
+    return location.pathname.startsWith(path);
+
+    }
+
     return (
-        <nav className="bg-blue-600 text-white shadow-md"> 
-            <div className="max-w-7xl mx-auto px-4"> 
+
+        <>
+        <nav className="bg-blue-600 text-white shadow-md">
+            <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between h-16">
                     {/* Logo y titulo */}
                     <div className="flex items-center">
@@ -23,9 +38,9 @@ export const Navbar = () => {
                     </div>
                     {/* Navegacion en escritorio */}
                     <div className="hidden md:flex">
-                        <NavLink to="/" active text="Inicio" icon={<Home size={18} />} />
-                        <NavLink to="/countries" text="Paises" icon={<Globe size={18} />} />
-                        <NavLink to="/persons" text="Personas" icon={<Users size={18}/>} />
+                        <NavLink to="/" active= {isActive("/")} text="Inicio" icon={<Home size={18} />} />
+                        <NavLink to="/countries" active= {isActive("/contries")} text="Paises" icon={<Globe size={18} />} />
+                        <NavLink to="/persons"active= {isActive("/persons")}  text="Personas" icon={<Users size={18}/>} />
                     </div>
                     {/* Boton de menu movil */}
                     <div className="md:hidden flex items-center">
@@ -44,9 +59,9 @@ export const Navbar = () => {
             {isMenuOpen && (
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <MobileNaveLink to="/" icon={<Home size={18} />} text="Inicio" active />
-                    <MobileNaveLink to="/countries" icon={<Globe size={18} />} text="Paises" />
-                    <MobileNaveLink to="/persons" icon={<Users size={18} />} text="Personas" />
+                    <MobileNaveLink to="/"  active= {isActive("/")} icon={<Home size={18} />} text="Inicio" />
+                    <MobileNaveLink to="/countries"  active= {isActive("/countries")} icon={<Globe size={18} />} text="Paises" />
+                    <MobileNaveLink to="/persons"  active= {isActive("/persons")}icon={<Users size={18} />} text="Personas" />
                     </div>
                 </div>
             )}
@@ -55,5 +70,13 @@ export const Navbar = () => {
 
 
         </nav>
+
+        {/* Principal content */}
+        <div className="min-h-screen bg-gray-100 mx-auto p-4 mt-4">
+            <Outlet />
+        </div>
+        </>
+
+        
     );
 }

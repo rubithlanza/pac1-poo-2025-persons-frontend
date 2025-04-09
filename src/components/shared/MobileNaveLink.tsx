@@ -1,4 +1,4 @@
-import React from "react"
+import { Link } from "react-router";
  
 interface Props {
     icon?: React.ReactNode;
@@ -9,9 +9,9 @@ interface Props {
 
 
 export const MobileNaveLink = ({icon, text, active = false, to} : Props) => {
-  return (
-<a
-    href="to"
+return (
+<Link
+    to = {to}
     className={`flex items-center px-3 py-2 rounded-md text-base font-LexendDeca-Medium
     ${
         active ? 
@@ -21,6 +21,6 @@ export const MobileNaveLink = ({icon, text, active = false, to} : Props) => {
 >
     <span className="mr-3">{icon}</span>
     {text}
-</a>
+</Link>
 )
 }
